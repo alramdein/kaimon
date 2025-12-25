@@ -1,0 +1,28 @@
+{
+  "domain": "products",
+  "basePath": "/api/v1/products",
+  "middlewares": {
+    "onRequest": [],
+    "onResponse": []
+  },
+  "headers": {
+    "X-Service": "products"
+  },
+  "routes": [
+    {
+      "path": "",
+      "method": "GET",
+      "target": "http://localhost:8082/products"
+    },
+    {
+      "path": "/:id",
+      "method": "GET",
+      "target": "http://localhost:8082/products/:id"
+    },
+    {
+      "path": "",
+      "method": "POST",
+      "target": "http://localhost:8082/products"
+    }
+  ]
+}

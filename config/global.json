@@ -1,0 +1,14 @@
+{
+  "middlewares": {
+    "onRequest": [
+      "logger",
+      "cors"
+    ],
+    "onResponse": [
+      "timer"
+    ]
+  },
+  "headers": {
+    "X-Powered-By": "Kaimon"
+  }
+}

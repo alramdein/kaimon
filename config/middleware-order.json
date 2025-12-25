@@ -1,0 +1,9 @@
+{
+  "onRequest": [
+    "logger",
+    "cors"
+  ],
+  "onResponse": [
+    "timer"
+  ]
+}

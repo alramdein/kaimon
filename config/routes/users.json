@@ -1,0 +1,42 @@
+{
+  "domain": "users",
+  "basePath": "/api/v1/users",
+  "middlewares": {
+    "onRequest": [],
+    "onResponse": []
+  },
+  "routes": [
+    {
+      "path": "",
+      "method": "GET",
+      "target": "http://localhost:8081/users",
+      "middlewares": {
+        "onRequest": [],
+        "onResponse": []
+      }
+    },
+    {
+      "path": "/:id",
+      "method": "GET",
+      "target": "http://localhost:8081/users/:id"
+    },
+    {
+      "path": "",
+      "method": "POST",
+      "target": "http://localhost:8081/users",
+      "headers": {
+        "X-Service": "users"
+      }
+    },
+    {
+      "path": "/:id",
+      "method": "PUT",
+      "target": "http://localhost:8081/users/:id"
+    },
+    {
+      "path": "/:id",
+      "method": "DELETE",
+      "target": "http://localhost:8081/users/:id"
+    }
+  ]
+}
