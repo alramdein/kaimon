@@ -38,11 +38,11 @@ var compileCmd = &cobra.Command{
 	Short: "Compile route configurations",
 	Long:  "Compile all route configuration files from config/routes into a single routes.json",
 	Run: func(cmd *cobra.Command, args []string) {
-		compiler := routes.NewCompiler("config/routes", "config", "config/global.json")
+		compiler := routes.NewCompiler("config/routes", "build", "config/global.json")
 		if err := compiler.Compile(); err != nil {
 			log.Fatalf("Failed to compile routes: %v", err)
 		}
-		log.Println("Routes compiled successfully to config/routes.json")
+		log.Println("Routes compiled successfully to build/routes.json")
 	},
 }
 
@@ -71,7 +71,7 @@ var serveCmd = &cobra.Command{
 
 		// Load routes
 		loader := routes.NewLoader(router, mwManager)
-		if err := loader.LoadFromFile("config/routes.json"); err != nil {
+		if err := loader.LoadFromFile("build/routes.json"); err != nil {
 			log.Fatalf("Failed to load routes: %v", err)
 		}
 

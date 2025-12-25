@@ -33,8 +33,10 @@ I also ditched the plugin architecture and put middlewares directly as a chain i
 ### 1. Build
 
 ```bash
-go build -o kaimon
+make build
 ```
+
+This creates the `kaimon` binary at the root.
 
 ### 2. Configure Global Settings
 
@@ -50,6 +52,8 @@ go build -o kaimon
   }
 }
 ```
+
+Global middlewares and headers apply to all routes.
 
 ### 3. Configure Routes
 
@@ -83,10 +87,10 @@ Create route configs per domain in `config/routes/`:
 }
 ```
 
-**Note**: Middlewares can be defined at three levels:
-- **Global** (applies to all routes)
-- **Domain** (applies to all routes in a domain)
-- **Route** (applies to specific route)
+**Middleware Levels** (applied in order):
+- **Global** (`config/global.json`) - Applies to all routes
+- **Domain** (per domain file) - Applies to all routes in that domain
+- **Route** (per route) - Applies to specific route only
 
 ### 4. Compile Routes
 
@@ -94,15 +98,28 @@ Create route configs per domain in `config/routes/`:
 ./kaimon compile
 ```
 
-This compiles all domain routes and global config into `config/routes.json`.
+Compiles all configs into `build/routes.json`.
 
-### 5. Start Gateway
+### 5. Run Gateway
 
 ```bash
 ./kaimon serve
 ```
 
-Gateway starts on port 8080.
+Gateway starts on `:8080`.
+
+**Quick Start**:
+```bash
+make build      # Build binary
+./kaimon compile # Compile routes
+./kaimon serve   # Start gateway
+```
+
+Or use Makefile shortcuts:
+```bash
+make compile    # Build + compile
+make serve      # Build + compile + serve
+```
 
 ## Adding Custom Middlewares
 
@@ -184,8 +201,20 @@ fw := framework.NewMyFramework()
 
 ## Commands
 
-- `./kaimon compile` - Compile route configurations
-- `./kaimon serve` - Start API gateway server
+```bash
+./kaimon                # Show help
+./kaimon compile        # Compile routes to build/routes.json
+./kaimon serve          # Start gateway on :8080
+./kaimon help [command] # Help for specific command
+```
+
+**Makefile shortcuts**:
+```bash
+make build     # Build binary
+make compile   # Build + compile routes
+make serve     # Build + compile + start server
+make clean     # Remove build artifacts
+```
 
 ## License
 
